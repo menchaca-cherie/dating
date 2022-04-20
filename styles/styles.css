@@ -1,6 +1,9 @@
 body{
-    margin: 25px 10px 10px 25px;
+    margin: 25px 100px 10px 300px;
 }
 h1{
-    margin-left: 200px;
+    margin-left: 100px;
+}
+.my-3{
+    font-style: italic;
 }
