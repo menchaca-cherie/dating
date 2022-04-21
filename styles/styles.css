@@ -1,23 +1,30 @@
+/*body styles*/
 body{
     margin: 25px 100px 10px 300px;
     background-color: #e1bdbd;
 }
+/*H1 styles*/
 h1{
     margin-left: 100px;
 }
+/*Quotes styles*/
 .my-3{
     font-style: italic;
 }
+/*image styles*/
 img{
     border-radius: 20px;
     border: 2px solid black;
 }
+/*button styles*/
 .btn-danger{
     border-radius: 10px;
 }
+/*nav styles*/
 a{
     color: black;
 }
+/*nav hover styles*/
 a:hover{
     color: darkred;
 }
