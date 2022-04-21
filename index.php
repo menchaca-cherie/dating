@@ -19,13 +19,7 @@ $f3->route('GET /', function(){
     $view = new Template();
     echo $view->render('views/home.html');
 });
-//Define my dating website
-$f3->route('GET /mydatingwebsite', function(){
-    //echo "Breakfast page";
-    //echo "Diner Project";
-    $view = new Template();
-    echo $view->render('views/mydatingwebsite.html');
-});
+
 
 //Run fat free
 $f3->run();
