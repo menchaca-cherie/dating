@@ -12,13 +12,19 @@ require_once ('vendor/autoload.php');
 $f3 = Base::instance();
 //echo gettype($f3); example of what type is $f3
 
-//Define a default route /- root directory of the project
-//Define a breakfast route
+//Define a default route /
 $f3->route('GET /', function(){
     //echo "Breakfast page";
     //echo "Diner Project";
     $view = new Template();
     echo $view->render('views/home.html');
+});
+//Define my dating website
+$f3->route('GET /mydatingwebsite', function(){
+    //echo "Breakfast page";
+    //echo "Diner Project";
+    $view = new Template();
+    echo $view->render('views/mydatingwebsite.html');
 });
 
 //Run fat free
