@@ -1,9 +1,17 @@
 body{
     margin: 25px 100px 10px 300px;
+    background-color: #e1bdbd;
 }
 h1{
     margin-left: 100px;
 }
 .my-3{
     font-style: italic;
+}
+img{
+    border-radius: 20px;
+    border: 2px solid black;
+}
+.btn-danger{
+    border-radius: 10px;
 }
