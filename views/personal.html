@@ -1,52 +1,63 @@
 <include href="views/header.html"></include>
 <body>
-<div class="container">
-    <h1>Personal Information</h1>
-    <form action="profile" method="post" class="form-control">
-        <!--Get Information-->
-        <div>
-            <!--First Name-->
-            <label for="first" class="col-sm-4 control-label">First Name:</label>
-            <div class="col-sm-4"><input class="form-control" type="text"
-                                         name="first" id="first">
-            </div>
-            <!--Last Name-->
-            <label for="last" class="col-sm-4 control-label">Last Name:</label>
-            <div class="col-sm-4"><input class="form-control" type="text"
-                                         name="last" id="last">
-            </div>
-            <!--Age-->
-            <label for="age" class="col-sm-4 control-label">Age:</label>
-            <div class="col-sm-4"><input class="form-control" type="text"
-                                         name="age" id="age">
-            </div>
-            <!--Option Gender-->
-            <!--Male-->
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="option" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">Male</label>
-            </div>
-            <!--Female-->
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="option" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">Female</label>
-            </div>
-            <!--Non-Binary-->
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="option" id="inlineCheckbox3" value="option3">
-                <label class="form-check-label" for="inlineCheckbox3">Non-binary</label>
-            </div>
-            <!--Phone Number-->
-            <label for="phone" class="col-sm-4 control-label">Phone Number:</label>
-            <div class="col-sm-4"><input class="form-control" type="text"
-                                         name="phone" id="phone">
-            </div>
-            <!--Next button-->
-            <div>
-                <button class="btn btn-primary" type="submit">Next</button>
-            </div>
+<div class="container d-flex">
+    <div class="card px-1 py-3">
+        <div class="card-body">
+            <h5 class="card-title">Personal Information</h5>
+            <form action="profile" method="post" class="form-control">
+                <!--Get Information-->
+                <div class="row">
+                    <!--First Name-->
+                    <div class="col-md-6">
+                    <label for="first" class="col-sm-4 control-label">First Name:</label>
+                    <input class="form-control" type="text"
+                                                 name="first" id="first">
+                    </div>
+                    <!--Last Name-->
+                    <div class="col-md-6">
+                    <label for="last" class="col-sm-4 control-label">Last Name:</label>
+                    <input class="form-control" type="text"
+                                                 name="last" id="last">
+                    </div>
+                    <!--Age-->
+                    <div class="col-md-6">
+                    <label for="age" class="mt-2 px-3">Age:</label>
+                    <input class="form-control" type="text"
+                                                 name="age" id="age">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="phone" class="mt-2 px-3">Phone Number:</label>
+                        <input class="form-control" type="text"
+                               name="phone" id="phone">
+                    </div>
+                    <!--Option Gender-->
+                    <!--Male-->
+                    <div class="container px-3 mt-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineCheckbox1" value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Male</label>
+                        </div>
+                        <!--Female-->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineCheckbox2" value="option2">
+                            <label class="form-check-label" for="inlineCheckbox2">Female</label>
+                        </div>
+                        <!--Non-Binary-->
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="inlineCheckbox3" value="option3">
+                            <label class="form-check-label" for="inlineCheckbox3">Non-binary</label>
+                        </div>
+                    </div>
+
+
+                    <!--Next button-->
+                    <div class="col-12">
+                        <button class="btn btn-danger float-right px-3" type="submit">Next</button>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>
 </body>
 </html>
