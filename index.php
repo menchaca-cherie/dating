@@ -5,6 +5,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+//Start session
+//session_start();
+
 //Require the autoload File
 require_once ('vendor/autoload.php');
 
@@ -14,10 +17,29 @@ $f3 = Base::instance();
 
 //Define a default route /
 $f3->route('GET /', function(){
-    //echo "Breakfast page";
-    //echo "Diner Project";
+
     $view = new Template();
     echo $view->render('views/home.html');
+});
+//Define a route for Personal Information
+$f3->route('GET /personal', function(){
+    //echo "Personal Information";
+
+    $view = new Template();
+    echo $view->render('views/personal.html');
+});
+//Define a route for Profile
+$f3->route('POST /profile', function(){
+
+
+    $view = new Template();
+    echo $view->render('views/profile.html');
+});
+$f3->route('POST /interest', function(){
+    //echo "Profile";
+
+    $view = new Template();
+    echo $view->render('views/interest.html');
 });
 
 
