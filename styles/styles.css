@@ -2,6 +2,7 @@
 body{
     margin: 25px 100px 10px 300px;
     background-color: #e1bdbd;
+    border: 2px white;
 }
 /*H1 styles*/
 h1{

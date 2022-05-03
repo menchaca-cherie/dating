@@ -1,12 +1,10 @@
-
 <?php
 
 //Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-
 //Start session
-//session_start();
+session_start();
 
 //Require the autoload File
 require_once ('vendor/autoload.php');
@@ -45,20 +43,20 @@ $f3->route('POST /interest', function(){
     var_dump($_POST);
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['state'] = $_POST['state'];
-    $_SESSION['gender'] = $_POST['gender'];
+    $_SESSION['seeking'] = $_POST['seeking'];
     $view = new Template();
     echo $view->render('views/interest.html');
 });
 $f3->route('POST /summary', function(){
     var_dump($_POST);
-    if(empty($_POST['interests']))
+    if(empty($_POST['interest']))
     {
         $interest = "";
     }
     else{
-        $interest = implode(", ", $_POST['interests']);
+        $interest = implode(", ", $_POST['interest']);
     }
-    $_SESSION['interests'] = $interest;
+    $_SESSION['interest'] = $interest;
     $view = new Template();
     echo $view->render('views/summary.html');
 });
