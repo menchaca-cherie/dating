@@ -27,8 +27,8 @@ $f3->route('GET /personal', function(){
     echo $view->render('views/personal.html');
 });
 //Define a route for Profile
-$f3->route('POST /profile', function(){
-    var_dump($_POST);
+$f3->route('GET|POST /profile', function(){
+
     $_SESSION['first'] = $_POST['first'];
     $_SESSION['last'] = $_POST['last'];
     $_SESSION['gender'] = $_POST['gender'];
@@ -38,17 +38,19 @@ $f3->route('POST /profile', function(){
     $view = new Template();
     echo $view->render('views/profile.html');
 });
-$f3->route('POST /interest', function(){
+$f3->route('GET|POST /interest', function(){
     //echo "Profile";
-    var_dump($_POST);
+
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['state'] = $_POST['state'];
     $_SESSION['seeking'] = $_POST['seeking'];
+    $_SESSION['bio'] = $_POST['bio'];
+
     $view = new Template();
     echo $view->render('views/interest.html');
 });
-$f3->route('POST /summary', function(){
-    var_dump($_POST);
+$f3->route('GET|POST /summary', function(){
+
     if(empty($_POST['interest']))
     {
         $interest = "";
