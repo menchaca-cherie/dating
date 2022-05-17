@@ -36,40 +36,16 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
             </div>
             <div class="row">
                 <div class="col ml-3">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck1" value="read">
-                    <label class="form-check-label" for="exampleCheck1">Read</label>
+                    <repeat group="{{ @indoors }}" value="{{ @indoor }}">
+                        <label class="form-check-label" for="exampleCheck"> <input type="checkbox"
+                                                                                   class="form-check-input" name="interest" id="exampleCheck" value="{{ @indoor}}"
+                        >
+                            {{ucfirst(@indoor) }}</label><br>
+                    </repeat>
                 </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input " name="interest[]" id="exampleCheck2" value="tv">
-                    <label class="form-check-label" for="exampleCheck1">Netflix and chill</label>
-                </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck3" value="cook">
-                    <label class="form-check-label" for="exampleCheck1">Cooking</label>
-                </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck4" value="yarn">
-                    <label class="form-check-label" for="exampleCheck1">Knitting/Crochet</label>
-                </div>
+
             </div>
-            <div class="row">
-                <div class="col ml-3">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck5" value="puzzle">
-                    <label class="form-check-label" for="exampleCheck1">Puzzle</label>
-                </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck6" value="cards">
-                    <label class="form-check-label" for="exampleCheck1">Playing Cards</label>
-                </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck7" value="video">
-                    <label class="form-check-label" for="exampleCheck1">Video Games</label>
-                </div>
-                <div class="col">
-                    <input type="checkbox" class="form-check-input" name="interest[]" id="exampleCheck8" value="clean">
-                    <label class="form-check-label" for="exampleCheck1">Clean</label>
-                </div>
-            </div>
+
             <!--Out-door Interest-->
             <div>
                 <label class="form-group mt-3">Out-door Interest</label>
