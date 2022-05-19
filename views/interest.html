@@ -15,7 +15,7 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
     <link rel="stylesheet" href="styles/styles.css">
     <title>My Dating Website</title>
 </head>
-<body class="container">
+<body class="container-fluid">
 <!--Nav Bar-->
 <nav class="navbar navbar-expand-md my-5 bg-dark">
     <ul id="myNav" class="navbar-nav">
@@ -36,7 +36,7 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
             </div>
             <div class="row">
                 <repeat group="{{ @indoorInterest }}" value="{{ @indoorInt }}">
-                    <div class="col ml-3">
+                    <div class="col-2 ml-3">
                     <label class="form-check-label" for="exampleCheck"> <input type="checkbox"
                                                                                class="form-check-input" name="indoorInts[]" id="exampleCheck" value="{{ @indoorInt}}"
                     >
@@ -50,7 +50,7 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
             </div>
             <div class="row">
                 <repeat group="{{ @outdoorInterest }}" value="{{ @outdoorInt }}">
-                    <div class="col ml-3">
+                    <div class="col-2 ml-3">
                         <label class="form-check-label" for="exampleCheck"> <input type="checkbox"
                                                                                    class="form-check-input" name="outdoorInts[]" id="exampleCheck1" value="{{ @@outdoorInt}}"
                         >
