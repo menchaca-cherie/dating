@@ -33,15 +33,17 @@ File Description: Personal Form Page for My Dating Website(dating website)
                 <div class="form-row">
                     <!--First Name-->
                     <div class="col-7">
-                    <label for="first" class="control-label">First Name:</label>
-                    <input class="form-control" type="text"
-                                                 name="first" id="first" value="{{ @firstName }}">
-                    </div>
-                    <!--display error if there is one first-->
-                    <check if="{{ isset(@errors['first']) }}">
-                        <span class="err">{{ @errors['first'] }}</span>
-                    </check>
-                    <br>
+                        <label for="first" class="control-label">First Name:</label>
+                        <input class="form-control" type="text"
+                                                     name="first" id="first" value="{{ @firstName }}">
+                        </div>
+                        <!--display error if there is one first-->
+                        <div class="col-7">
+                            <check if="{{ isset(@errors['first']) }}">
+                                <span class="err">{{ @errors['first'] }}</span>
+                            </check>
+                            <br>
+                        </div>
                     <!--Privacy Policy-->
                     <div class="col border bg-light">
                         <p>Note: All information entered is protected by our privacy policy.
@@ -54,9 +56,11 @@ File Description: Personal Form Page for My Dating Website(dating website)
                                                  name="last" id="last" value="{{ @lastName }}">
                     </div>
                     <!--display error if there is one last-->
-                    <check if="{{ isset(@errors['last']) }}">
-                        <span class="err">{{ @errors['last'] }}</span>
-                    </check>
+                    <div class="col-7">
+                        <check if="{{ isset(@errors['last']) }}">
+                            <span class="err">{{ @errors['last'] }}</span>
+                        </check>
+                    </div>
                     <!--Age-->
                     <div class="col-7">
                     <label for="age" class="mt-2 px-3">Age:</label>
@@ -64,9 +68,11 @@ File Description: Personal Form Page for My Dating Website(dating website)
                                                  name="age" id="age" value="{{ @age }}">
                     </div>
                     <!--display error if there is age-->
-                    <check if="{{ isset(@errors['age']) }}">
-                        <span class="err">{{ @errors['age'] }}</span>
-                    </check>
+                    <div class="col-7">
+                        <check if="{{ isset(@errors['age']) }}">
+                            <span class="err">{{ @errors['age'] }}</span>
+                        </check>
+                    </div>
                     <!--Get Gender-->
                     <div class="container px-3 mt-3">
                         <label class="control-label">Select Gender: </label>
@@ -78,6 +84,11 @@ File Description: Personal Form Page for My Dating Website(dating website)
                                     {{ ucfirst(@gender) }}</label><br>
                             </repeat>
                         </div>
+                        <div>
+                            <check if="{{ isset(@errors['gender']) }}">
+                                <span class="text-danger">{{ @errors['gender'] }}</span>
+                            </check>
+                        </div>
                     </div>
                     <!--Phone number-->
                     <div class="col-7">
@@ -86,9 +97,11 @@ File Description: Personal Form Page for My Dating Website(dating website)
                                name="phone" id="phone" value="{{ @phone }}">
                     </div>
                     <!--display error if there is age-->
-                    <check if="{{ isset(@errors['phone']) }}">
-                        <span class="err">{{ @errors['phone'] }}</span>
-                    </check>
+                    <div class="col-7">
+                        <check if="{{ isset(@errors['phone']) }}">
+                            <span class="err">{{ @errors['phone'] }}</span>
+                        </check>
+                    </div>
                     <!--Next button-->
                     <div class="col-12">
                         <button class="btn btn-danger float-right mt-3 px-3" type="submit">Next</button>
