@@ -15,7 +15,7 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
     <link rel="stylesheet" href="styles/styles.css">
     <title>My Dating Website</title>
 </head>
-<body class="container-fluid">
+<body class="container">
 <!--Nav Bar-->
 <nav class="navbar navbar-expand-md my-5 bg-dark">
     <ul id="myNav" class="navbar-nav">
@@ -29,7 +29,7 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
         <!--Interest Form Title-->
         <h5>Interests</h5>
         <hr>
-        <form action="summary" method="post" class="form-control">
+        <form action="interest" method="post" class="form-control">
             <!--Indoor Interest-->
             <div>
                 <label class="form-group">In-door Interests</label>
@@ -44,6 +44,11 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
                     </div>
                 </repeat>
             </div>
+            <div class="col-12">
+                <check if="{{ isset(@errors['indoorInt']) }}">
+                    <span class="err">{{ @errors['indoorInt'] }}</span>
+                </check>
+            </div>
             <!--Out-door Interest-->
             <div>
                 <label class="form-group mt-3">Out-door Interest</label>
@@ -57,7 +62,11 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
                             {{ucfirst(@outdoorInt) }}</label><br>
                     </div>
                 </repeat>
-
+            </div>
+            <div class="col-12">
+                <check if="{{ isset(@errors['outdoorInt']) }}">
+                    <span class="err">{{ @errors['outdoorInt'] }}</span>
+                </check>
             </div>
             <!--Next Button-->
             <div>

@@ -14,7 +14,7 @@ File Description: Profile Form Page for My Dating Website(dating website)
     <link rel="stylesheet" href="styles/styles.css">
     <title>My Dating Website</title>
 </head>
-<body class="container-fluid">
+<body class="container">
 <!--Nav Bar-->
 <nav class="navbar navbar-expand-md my-5 bg-dark">
     <ul id="myNav" class="navbar-nav">
@@ -28,7 +28,7 @@ File Description: Profile Form Page for My Dating Website(dating website)
         <!--Profile Title Form-->
             <h5>Profile</h5>
             <hr>
-            <form action="interest" method="post" class="form-control">
+            <form action="#" method="post" class="form-control">
                 <!--Get data-->
                 <div class="row">
                     <div class="col-6">
@@ -38,7 +38,7 @@ File Description: Profile Form Page for My Dating Website(dating website)
                         </div>
                         <!--display error if there is one -->
                         <check if="{{ isset(@errors['email']) }}">
-                            <span class="err">{{ @errors['email'] }}</span>
+                            <span class="err ml-3">{{ @errors['email'] }}</span>
                         </check>
                         <br>
                         <!--Get state-->
@@ -81,7 +81,7 @@ File Description: Profile Form Page for My Dating Website(dating website)
                     <!--Button-->
                     <div class="col-md-12">
                         <div>
-                            <button class="btn btn-danger float-right px-3" type="submit">Next</button>
+                            <button class="btn btn-danger float-right px-5" type="submit">Next</button>
                         </div>
                     </div>
                 </div>

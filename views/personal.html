@@ -10,106 +10,120 @@ File Description: Personal Form Page for My Dating Website(dating website)
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/styles.css">
     <title>My Dating Website</title>
 </head>
-<body class="container-fluid">
-    <!--Nav Bar-->
-    <nav class="navbar navbar-expand-md my-5 bg-dark">
-        <ul id="myNav" class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link bg-light" href="{{ @BASE }}">My Dating Website</a>
-            </li>
-        </ul>
-    </nav>
-    <div class="form-box row mt-3 border">
-        <div class="col-12 p-3">
-            <!--Personal Title Form-->
-            <h5>Personal Information</h5>
-            <hr>
-            <form action="profile" method="post" class="form-control">
-                <!--Get Information-->
-                <div class="form-row">
-                    <!--First Name-->
-                    <div class="col-7">
-                        <label for="first" class="control-label">First Name:</label>
-                        <input class="form-control" type="text"
-                                                     name="first" id="first" value="{{ @firstName }}">
+<body class="container">
+<!--Nav Bar-->
+<nav class="navbar navbar-expand-md my-5 bg-dark">
+    <ul id="myNav" class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link bg-light" href="{{ @BASE }}">My Dating Website</a>
+        </li>
+    </ul>
+</nav>
+<div class="row mt-3 border">
+    <div class="col-12 px-3">
+        <!--Profile Title Form-->
+        <h5>Profile</h5>
+        <hr>
+        <form action="#" method="post" class="form-control">
+            <!--Get data-->
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <label for="first" class="control-label">First Name:</label>
+                            <input class="form-control" type="text"
+                                   name="first" id="first" value="{{ @firstName }}">
                         </div>
+
                         <!--display error if there is one first-->
-                        <div class="col-7">
+                        <div class="col-12">
                             <check if="{{ isset(@errors['first']) }}">
                                 <span class="err">{{ @errors['first'] }}</span>
                             </check>
                             <br>
                         </div>
-                    <!--Privacy Policy-->
-                    <div class="col border bg-light">
+                        <!--Last Name-->
+                        <div class="col-12">
+                            <label for="last" class="control-label">Last Name:</label>
+                            <input class="form-control" type="text"
+                                   name="last" id="last" value="{{ @lastName }}">
+                        </div>
+                        <!--display error if there is one last-->
+                        <div class="col-12">
+                            <check if="{{ isset(@errors['last']) }}">
+                                <span class="err">{{ @errors['last'] }}</span>
+                            </check>
+                        </div>
+                        <!--Age-->
+                        <div class="col-12">
+                            <label for="age" class="mt-2">Age:</label>
+                            <input class="form-control" type="text"
+                                   name="age" id="age" value="{{ @age }}">
+                        </div>
+                        <!--display error if there is age-->
+                        <div class="col-12">
+                            <check if="{{ isset(@errors['age']) }}">
+                                <span class="err">{{ @errors['age'] }}</span>
+                            </check>
+                        </div>
+                        <!--Get Gender-->
+                        <div class="col-12 mt-3">
+                            <label class="control-label">Select Gender: </label>
+                            <div class="form-check form-check-inline">
+                                <repeat group="{{ @genders }}" value="{{ @gender }}">
+                                    <label class="form-check-label" for="inlineCheckbox"><input
+                                            class="form-check-input ml-3"
+                                            type="radio"
+                                            name="gender"
+                                            id="inlineCheckbox"
+                                            value="{{ @gender }}"
+                                    >
+                                        {{ ucfirst(@gender) }}</label><br>
+                                </repeat>
+                            </div>
+                            <div>
+                                <check if="{{ isset(@errors['gender']) }}">
+                                    <span class="err">{{ @errors['gender'] }}</span>
+                                </check>
+                            </div>
+                        </div>
+                        <!--Phone number-->
+                        <div class="col-12">
+                            <label for="phone" class="mt-2">Phone Number:</label>
+                            <input class="form-control" type="text"
+                                   name="phone" id="phone" value="{{ @phone }}">
+                        </div>
+
+                        <!--display error if there is age-->
+                        <div class="col-12">
+                            <check if="{{ isset(@errors['phone']) }}">
+                                <span class="err">{{ @errors['phone'] }}</span>
+                            </check>
+                        </div>
+                    </div> <!-- row-->
+                </div> <!-- 8-->
+
+                <!--Privacy Policy-->
+                <div class="col-4 mt-4">
+                    <div class="border bg-light">
                         <p>Note: All information entered is protected by our privacy policy.
                             Profile information can only be viewed by others with your permisson. </p>
                     </div>
-                    <!--Last Name-->
-                    <div class="col-7">
-                    <label for="last" class="control-label">Last Name:</label>
-                    <input class="form-control" type="text"
-                                                 name="last" id="last" value="{{ @lastName }}">
-                    </div>
-                    <!--display error if there is one last-->
-                    <div class="col-7">
-                        <check if="{{ isset(@errors['last']) }}">
-                            <span class="err">{{ @errors['last'] }}</span>
-                        </check>
-                    </div>
-                    <!--Age-->
-                    <div class="col-7">
-                    <label for="age" class="mt-2 px-3">Age:</label>
-                    <input class="form-control" type="text"
-                                                 name="age" id="age" value="{{ @age }}">
-                    </div>
-                    <!--display error if there is age-->
-                    <div class="col-7">
-                        <check if="{{ isset(@errors['age']) }}">
-                            <span class="err">{{ @errors['age'] }}</span>
-                        </check>
-                    </div>
-                    <!--Get Gender-->
-                    <div class="container px-3 mt-3">
-                        <label class="control-label">Select Gender: </label>
-                        <div class="form-check form-check-inline">
-                            <repeat group="{{ @genders }}" value="{{ @gender }}">
-                                <label class="form-check-label" for="inlineCheckbox"><input class="form-check-input ml-3" type="radio"
-                                                                       name="gender" id="inlineCheckbox" value="{{ @gender }}"
-                                >
-                                    {{ ucfirst(@gender) }}</label><br>
-                            </repeat>
-                        </div>
-                        <div>
-                            <check if="{{ isset(@errors['gender']) }}">
-                                <span class="text-danger">{{ @errors['gender'] }}</span>
-                            </check>
-                        </div>
-                    </div>
-                    <!--Phone number-->
-                    <div class="col-7">
-                        <label for="phone" class="mt-2 px-3">Phone Number:</label>
-                        <input class="form-control" type="text"
-                               name="phone" id="phone" value="{{ @phone }}">
-                    </div>
-                    <!--display error if there is age-->
-                    <div class="col-7">
-                        <check if="{{ isset(@errors['phone']) }}">
-                            <span class="err">{{ @errors['phone'] }}</span>
-                        </check>
-                    </div>
-                    <!--Next button-->
-                    <div class="col-12">
-                        <button class="btn btn-danger float-right mt-3 px-3" type="submit">Next</button>
-                    </div>
                 </div>
-            </form>
-        </div>
+            </div> <!--row-->
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn btn-danger float-right my-3 px-5" type="submit">Next</button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
 </body>
 </html>

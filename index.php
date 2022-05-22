@@ -24,72 +24,84 @@ $f3->route('GET /', function(){
 $f3->route('GET|POST /personal', function($f3){
     //echo "Personal Information";
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+        var_dump($_POST);
 
         //Get the data
+        //first
         $first = $_POST['first'];
-        $last = $_POST['last'];
-        $age = $_POST['age'];
-        $phone = $_POST['phone'];
-
         $f3->set('firstName', $first);
-        $f3->set('lastName', $last);
-        $f3->set('age', $age);
-        $f3->set('phone', $phone);
 
-        $gender = "";
-        if(isset($_POST['gender'])){
-            $gender = $_POST['gender'];
+        //require
+        $first = isset($_POST['first']) ? $_POST['first'] : "";
+        //If data is first name is valid
+        //if data is valid
+        if(validName($first))
+        {
+            $_SESSION['first'] = $first;
         }
-    }
-        //if data is valid in first
-    if(validName($first))
-    {
-        $_SESSION['first'] = $first;
-    }
-    else
-    {
-        $f3->set('errors["first"]', 'Please enter your first name with letters.');
-    }
-    if(validName($last))
-    {
-        $_SESSION['last'] = $last;
-    }
-    else
-    {
-        $f3->set('errors["last"]', 'Please enter your last name with letters.');
-    }
-    if(validAge($age))
-    {
-        $_SESSION['first'] = $age;
-    }
-    else
-    {
-        $f3->set('errors["age"]', 'Please enter your age.');
-    }
-    if(validPhone($phone))
-    {
-        $_SESSION['phone'] = $phone;
-    }
-    else
-    {
-        $f3->set('errors["phone"]', 'Please enter your telephone number.');
-    }
-    if(validGender($gender))
-    {
-        $_SESSION['gender'] = $gender;
-    }
-    else
-    {
-        $f3->set('errors["gender"]', 'Gender selection is invalid');
-    }
+        else
+        {
+            $f3->set('errors["first"]', 'Please enter your first name with letters.');
+        }
 
-    //Redirect to order2 route if there are no errors
-    if(empty($f3->get('errors'))) {
-        header('location: profile');
+        //last
+        $last = $_POST['last'];
+        $f3->set('lastName', $last);
+        $last = isset($_POST['last']) ? $_POST['last'] : "";
+        if(validName($last))
+        {
+            $_SESSION['last'] = $last;
+        }
+        else
+        {
+            $f3->set('errors["last"]', 'Please enter your last name with letters.');
+        }
+
+        //age
+        $age = $_POST['age'];
+        $f3->set('age', $age);
+        $age = isset($_POST['age']) ? $_POST['age'] : "";
+        if(validAge($age))
+        {
+            $_SESSION['age'] = $age;
+        }
+        else
+        {
+            $f3->set('errors["age"]', 'Please enter your age.');
+        }
+
+        //phone
+        $phone = $_POST['phone'];
+        $f3->set('phone', $phone);
+        $phone = isset($_POST['phone']) ? $_POST['phone'] : "";
+        if(validPhone($phone))
+        {
+            $_SESSION['phone'] = $phone;
+        }
+        else
+        {
+            $f3->set('errors["phone"]', 'Please enter your telephone number.');
+        }
+
+        //gender
+        $gender = $_POST['gender'];
+        $f3->set('gender', $gender);
+        $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
+        if(validGender($gender))
+        {
+            $_SESSION['gender'] = $gender;
+        }
+        else
+        {
+            $f3->set('errors["gender"]', 'Gender selection is invalid');
+        }
+
+        //Redirect to order2 route if there are no errors
+        if(empty($f3->get('errors'))) {
+            header('location: profile');
+        }
+
     }
-
-
 
     //Add genders data to hive
     $f3->set('genders', getGender());
@@ -102,13 +114,33 @@ $f3->route('GET|POST /profile', function($f3){
 
         //Get the data
         $email = $_POST['email'];
-        $state = $_POST['state'];
-        $seeking = $_POST['seeking'];
-        $bio = $_POST['bio'];
-        $f3->set('userState', $state);
         $f3->set('email', $email);
+        $email = isset($_POST['email']) ? $_POST['email'] : "";
+        if(validEmail($email))
+        {
+            $_SESSION['email'] = $email;
+        }
+        else
+        {
+            $f3->set('errors["email"]', 'Please enter a valid email.');
+        }
+        //Redirect to order2 route if there are no errors
+        if(empty($f3->get('errors'))) {
+            header('location: interest');
+        }
+
+
+        $state = $_POST['state'];
+        $f3->set('userState', $state);
+        $_SESSION['state'] = $state;
+
+        $seeking = $_POST['seeking'];
         $f3->set('userSeeking', $seeking);
+        $_SESSION['seeking'] = $seeking;
+
+        $bio = $_POST['bio'];
         $f3->set('bio', $bio);
+        $_SESSION['bio'] = $bio;
     }
 
     //Add states data to hive
@@ -122,11 +154,47 @@ $f3->route('GET|POST /interest', function($f3){
     //echo "Profile";
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        //Get the data
-        $indoor = $_POST['indoor'];
-        $outdoor = $_POST['outdoor'];
-        $f3->set('interestIndoor', $indoor);
-        $f3->set('interestOutdoor', $outdoor);
+        $indoorInts = $_POST['indoorInts'];
+        $f3->set('indoorInts', $indoorInts);
+        $indoorInts = isset($_POST['indoorInt']) ? $_POST['indoorInt'] : "";
+
+        //$indoorInts = "";
+        if(isset($indoorInts)){
+            if(validIndoor($indoorInts)){
+                if (empty($_POST['indoorInts'])) {
+                   $_SESSION['indoorInts'] = 'None selected from indoor interest.';
+                }
+                else {
+                    $_SESSION['indoorInts'] = $indoorInts;
+                }
+            }
+        }else{
+            $f3->set('errors["indoorInts"]', 'No, spoofing please.');
+        }
+
+
+            header('location: interest');
+
+
+
+
+//        $outdoorInt = $_POST['outdoorInt'];
+//        $f3->set('outdoorInt', $outdoorInt);
+//        $outdoorInts = isset($_POST['outdoorInts']) ? $_POST['outdoorInts'] : "";
+//
+//        if(validOutdoor($outdoorInts))
+//        {
+//        $_SESSION['outdoorInts'] = $outdoorInts;
+//        }
+//        else
+//        {
+//            $f3->set('errors["outdoorInts"]', 'Please select any outdoor interest.');
+//        }
+//
+//        header('location: summary');
+
+
+
 
     }
     //Add interest data to hive
@@ -139,22 +207,6 @@ $f3->route('GET|POST /interest', function($f3){
 });
 $f3->route('GET|POST /summary', function(){
 
-    if(empty($_POST['indoorActs'])) {
-        $indoorInts = "no indoor interest selected";
-    }
-    else {
-        $indoorInts = implode(", ", $_POST['indoorInts']);
-    }
-    $_SESSION['indoorInts'] = $indoorInts;
-
-
-    if(empty($_POST['outdoorInts'])) {
-        $indoorActs = "no outdoor interest selected";
-    }
-    else {
-        $outdoorInts = implode(", ", $_POST['outdoorInts']);
-    }
-    $_SESSION['outdoorInts'] = $outdoorInts;
 
     $view = new Template();
     echo $view->render('views/summary.html');
