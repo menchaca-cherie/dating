@@ -7,23 +7,23 @@ error_reporting(E_ALL);
 session_start();
 
 //Require the autoload File
-require_once ('vendor/autoload.php');
-require_once ('model/data-layer.php');
-require_once ('model/validation.php');
+require_once('vendor/autoload.php');
+require_once('model/data-layer.php');
+require_once('model/validation.php');
 //Create an instance of the base class
 $f3 = Base::instance();
 //echo gettype($f3); example of what type is $f3
 
 //Define a default route /
-$f3->route('GET /', function(){
+$f3->route('GET /', function () {
 
     $view = new Template();
     echo $view->render('views/home.html');
 });
 //Define a route for Personal Information
-$f3->route('GET|POST /personal', function($f3){
+$f3->route('GET|POST /personal', function ($f3) {
     //echo "Personal Information";
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         var_dump($_POST);
 
         //Get the data
@@ -35,12 +35,9 @@ $f3->route('GET|POST /personal', function($f3){
         $first = isset($_POST['first']) ? $_POST['first'] : "";
         //If data is first name is valid
         //if data is valid
-        if(validName($first))
-        {
+        if (validName($first)) {
             $_SESSION['first'] = $first;
-        }
-        else
-        {
+        } else {
             $f3->set('errors["first"]', 'Please enter your first name with letters.');
         }
 
@@ -48,12 +45,9 @@ $f3->route('GET|POST /personal', function($f3){
         $last = $_POST['last'];
         $f3->set('lastName', $last);
         $last = isset($_POST['last']) ? $_POST['last'] : "";
-        if(validName($last))
-        {
+        if (validName($last)) {
             $_SESSION['last'] = $last;
-        }
-        else
-        {
+        } else {
             $f3->set('errors["last"]', 'Please enter your last name with letters.');
         }
 
@@ -61,12 +55,9 @@ $f3->route('GET|POST /personal', function($f3){
         $age = $_POST['age'];
         $f3->set('age', $age);
         $age = isset($_POST['age']) ? $_POST['age'] : "";
-        if(validAge($age))
-        {
+        if (validAge($age)) {
             $_SESSION['age'] = $age;
-        }
-        else
-        {
+        } else {
             $f3->set('errors["age"]', 'Please enter your age.');
         }
 
@@ -74,12 +65,9 @@ $f3->route('GET|POST /personal', function($f3){
         $phone = $_POST['phone'];
         $f3->set('phone', $phone);
         $phone = isset($_POST['phone']) ? $_POST['phone'] : "";
-        if(validPhone($phone))
-        {
+        if (validPhone($phone)) {
             $_SESSION['phone'] = $phone;
-        }
-        else
-        {
+        } else {
             $f3->set('errors["phone"]', 'Please enter your telephone number.');
         }
 
@@ -87,17 +75,14 @@ $f3->route('GET|POST /personal', function($f3){
         $gender = $_POST['gender'];
         $f3->set('gender', $gender);
         $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
-        if(validGender($gender))
-        {
+        if (validGender($gender)) {
             $_SESSION['gender'] = $gender;
-        }
-        else
-        {
+        } else {
             $f3->set('errors["gender"]', 'Gender selection is invalid');
         }
 
         //Redirect to order2 route if there are no errors
-        if(empty($f3->get('errors'))) {
+        if (empty($f3->get('errors'))) {
             header('location: profile');
         }
 
@@ -109,23 +94,20 @@ $f3->route('GET|POST /personal', function($f3){
     echo $view->render('views/personal.html');
 });
 //Define a route for Profile
-$f3->route('GET|POST /profile', function($f3){
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+$f3->route('GET|POST /profile', function ($f3) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         //Get the data
         $email = $_POST['email'];
         $f3->set('email', $email);
         $email = isset($_POST['email']) ? $_POST['email'] : "";
-        if(validEmail($email))
-        {
+        if (validEmail($email)) {
             $_SESSION['email'] = $email;
-        }
-        else
-        {
+        } else {
             $f3->set('errors["email"]', 'Please enter a valid email.');
         }
         //Redirect to order2 route if there are no errors
-        if(empty($f3->get('errors'))) {
+        if (empty($f3->get('errors'))) {
             header('location: interest');
         }
 
@@ -150,67 +132,62 @@ $f3->route('GET|POST /profile', function($f3){
     $view = new Template();
     echo $view->render('views/profile.html');
 });
-$f3->route('GET|POST /interest', function($f3){
+$f3->route('GET|POST /interest', function ($f3) {
     //echo "Profile";
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $indoorInts = $_POST['indoorInts'];
         $f3->set('indoorInts', $indoorInts);
-        $indoorInts = isset($_POST['indoorInt']) ? $_POST['indoorInt'] : "";
+        //$indoorInts = isset($_POST['indoorInt']) ? $_POST['indoorInt'] : "";
+        $indoorInts = "";
+        if (empty($_POST['indoorInts'])) {
+            $indoorActs = "no indoor activities selected";
+        } else {
+            $indoorInts = implode(", ", $_POST['indoorInts']);
 
-        //$indoorInts = "";
-        if(isset($indoorInts)){
-            if(validIndoor($indoorInts)){
-                if (empty($_POST['indoorInts'])) {
-                   $_SESSION['indoorInts'] = 'None selected from indoor interest.';
-                }
-                else {
-                    $_SESSION['indoorInts'] = $indoorInts;
-                }
+            if (!validIndoor($_POST['indoorInts'])) {
+
+                //$f3->set('errors["indoorInts"]', 'No spoofing please!');
+                var_dump($_POST);
             }
-        }else{
-            $f3->set('errors["indoorInts"]', 'No, spoofing please.');
         }
+        $_SESSION['indoorInts'] = $indoorInts;
 
 
-            header('location: interest');
+        $outdoorInts = $_POST['outdoorInts'];
+        $f3->set('outdoorInts', $outdoorInts);
+        //$outdoorInts = isset($_POST['outdoorInts']) ? $_POST['outdoorInts'] : "";
+        $outdoorInts = "";
+        if (empty($_POST['outdoorInts'])) {
+            $indoorActs = "no outdoor activities selected";
+        } else {
+            $outdoorInts = implode(", ", $_POST['outdoorInts']);
 
+            if (!validOutdoor($_POST['outdoorInts'])) {
 
-
-
-//        $outdoorInt = $_POST['outdoorInt'];
-//        $f3->set('outdoorInt', $outdoorInt);
-//        $outdoorInts = isset($_POST['outdoorInts']) ? $_POST['outdoorInts'] : "";
-//
-//        if(validOutdoor($outdoorInts))
-//        {
-//        $_SESSION['outdoorInts'] = $outdoorInts;
-//        }
-//        else
-//        {
-//            $f3->set('errors["outdoorInts"]', 'Please select any outdoor interest.');
-//        }
-//
-//        header('location: summary');
-
-
-
+                //$f3->set('errors["outdoorInts"]', 'No spoofing please!');
+                var_dump($_POST);
+            }
+        }
+        $_SESSION['outdoorInts'] = $outdoorInts;
+        header('location: summary');
 
     }
-    //Add interest data to hive
-    $f3->set('indoorInterest', getIndoorInterest());
-    $f3->set('outdoorInterest', getOutdoorInterest());
+
+        //Add interest data to hive
+        $f3->set('indoorInterest', getIndoorInterest());
+        $f3->set('outdoorInterest', getOutdoorInterest());
 
 
-    $view = new Template();
-    echo $view->render('views/interest.html');
-});
-$f3->route('GET|POST /summary', function(){
+        $view = new Template();
+        echo $view->render('views/interest.html');
+    });
+    $f3->route('GET|POST /summary', function () {
 
 
-    $view = new Template();
-    echo $view->render('views/summary.html');
-});
+        $view = new Template();
+        echo $view->render('views/summary.html');
+    });
 
 //Run fat free
-$f3->run();
+    $f3->run();
