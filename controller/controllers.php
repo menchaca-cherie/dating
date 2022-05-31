@@ -137,6 +137,135 @@ class Controllers
         $view = new Template();
         echo $view->render('views/personal.html');
     }
+    function profile()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            //Get the data
+            $email = $_POST['email'];
+            $this->_f3->set('email', $email);
+            $email = isset($_POST['email']) ? $_POST['email'] : "";
+            if (Validation::validEmail($email)) {
+                //Create a new membership object
+                $membership = new Membership();
+
+                //Add the food to the order
+                $membership->setEmail($email);
+
+                //Store the membership in the session array
+                $_SESSION['membership'] = $membership;
+
+                //store it in the session array
+                $_SESSION['email'] = $email;
+            } else {
+                $this->_f3->set('errors["email"]', 'Please enter a valid email.');
+            }
+            //Redirect to order2 route if there are no errors
+            if (empty($this->_f3->get('errors'))) {
+                header('location: interest');
+            }
+
+
+            $state = $_POST['state'];
+            $this->_f3->set('userState', $state);
+            //Create a new membership object
+            $membership = new Membership();
+
+            //Add the food to the order
+            $membership->setState($state);
+
+            //Store the membership in the session array
+            $_SESSION['membership'] = $membership;
+
+            //store it in the session array
+            $_SESSION['state'] = $state;
+
+            $seeking = $_POST['seeking'];
+            $this->_f3->set('userSeeking', $seeking);
+            //Create a new membership object
+            $membership = new Membership();
+
+            //Add the food to the order
+            $membership->setSeeking($seeking);
+
+            //Store the membership in the session array
+            $_SESSION['membership'] = $membership;
+
+            //store it in the session array
+            $_SESSION['seeking'] = $seeking;
+
+            $bio = $_POST['bio'];
+            $this->_f3->set('bio', $bio);
+            //Create a new membership object
+            $membership = new Membership();
+
+            //Add the food to the order
+            $membership->setBio($bio);
+
+            //Store the membership in the session array
+            $_SESSION['membership'] = $membership;
+
+            //store it in the session array
+            $_SESSION['bio'] = $bio;
+        }
+
+        //Add states data to hive
+        $this->_f3->set('states',DataLayer::getState());
+        $this->_f3->set('seekings',DataLayer::getSeeking());
+
+        $view = new Template();
+        echo $view->render('views/profile.html');
+    }
+    function interest()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $indoorInts = $_POST['indoorInts'];
+            $this->_f3->set('indoorInts', $indoorInts);
+            //$indoorInts = isset($_POST['indoorInt']) ? $_POST['indoorInt'] : "";
+            $indoorInts = "";
+            if (empty($_POST['indoorInts'])) {
+                $indoorActs = "no indoor activities selected";
+            } else {
+                $indoorInts = implode(", ", $_POST['indoorInts']);
+
+                if (!validIndoor($_POST['indoorInts'])) {
+
+                    //$f3->set('errors["indoorInts"]', 'No spoofing please!');
+                    var_dump($_POST);
+                }
+            }
+            $_SESSION['indoorInts'] = $indoorInts;
+
+
+            $outdoorInts = $_POST['outdoorInts'];
+            $this->_f3->set('outdoorInts', $outdoorInts);
+            //$outdoorInts = isset($_POST['outdoorInts']) ? $_POST['outdoorInts'] : "";
+            $outdoorInts = "";
+            if (empty($_POST['outdoorInts'])) {
+                $indoorActs = "no outdoor activities selected";
+            } else {
+                $outdoorInts = implode(", ", $_POST['outdoorInts']);
+
+                if (!validOutdoor($_POST['outdoorInts'])) {
+
+                    //$f3->set('errors["outdoorInts"]', 'No spoofing please!');
+                    var_dump($_POST);
+                }
+            }
+            $_SESSION['outdoorInts'] = $outdoorInts;
+            header('location: summary');
+
+        }
+
+        //Add interest data to hive
+        $f3->set('indoorInterest', getIndoorInterest());
+        $f3->set('outdoorInterest', getOutdoorInterest());
+
+
+        $view = new Template();
+        echo $view->render('views/interest.html');
+    }
 
 
 }

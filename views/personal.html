@@ -15,7 +15,7 @@ File Description: Personal Form Page for My Dating Website(dating website)
     <link rel="stylesheet" href="styles/styles.css">
     <title>My Dating Website</title>
 </head>
-<body class="container">
+<body id="form" class="container">
 <!--Nav Bar-->
 <nav class="navbar navbar-expand-md my-5 bg-dark">
     <ul id="myNav" class="navbar-nav">
@@ -40,7 +40,7 @@ File Description: Personal Form Page for My Dating Website(dating website)
                                    name="first" id="first" value="{{ @firstName }}">
                         </div>
 
-                        <!--display error if there is one first-->
+                                  <!--display error if there is one first-->
                         <div class="col-12">
                             <check if="{{ isset(@errors['first']) }}">
                                 <span class="err">{{ @errors['first'] }}</span>
@@ -104,6 +104,10 @@ File Description: Personal Form Page for My Dating Website(dating website)
                             <check if="{{ isset(@errors['phone']) }}">
                                 <span class="err">{{ @errors['phone'] }}</span>
                             </check>
+                        </div>
+                        <div class="mt-2 ml-3">
+                            <input type="checkbox" id="premium" name="premium" value={{ @premium }}>
+                            <label for="premium">Sign-up for a premium account.</label><br>
                         </div>
                     </div> <!-- row-->
                 </div> <!-- 8-->
