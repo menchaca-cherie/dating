@@ -2,7 +2,7 @@
 
 class Controllers
 {
-    private $f3;
+    private $_f3;
     function __construct($f3)
     {
         $this->_f3 = $f3;
@@ -110,17 +110,7 @@ class Controllers
             $this->_f3->set('gender', $gender);
             $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
             if (Validation::validGender($gender)) {
-                //Create a new membership object
-                $membership = new Membership();
-
-                //Add the food to the order
-                $membership->setGender($gender);
-
-                //Store the membership in the session array
-                $_SESSION['membership'] = $membership;
-
-                //store it in the session array
-                $_SESSION['gender'] = $gender;
+                $_SESSION['membership']->setGender($gender);
             } else {
                 $this->_f3->set('errors["gender"]', 'Gender selection is invalid');
             }
@@ -133,7 +123,7 @@ class Controllers
         }
 
         //Add genders data to hive
-        $this->_f3->set('genders', DataLayer::getGender());
+        $this->_f3->set('genders', DataLayer::getGenders());
         $view = new Template();
         echo $view->render('views/personal.html');
     }
@@ -218,6 +208,10 @@ class Controllers
     }
     function interest()
     {
+        //Add interest data to hive
+        $this->_f3->set('indoorInterest',DataLayer::getIndoorInterest());
+        $this->_f3->set('outdoorInterest',DataLayer::getOutdoorInterest());
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $indoorInts = $_POST['indoorInts'];
@@ -229,13 +223,13 @@ class Controllers
             } else {
                 $indoorInts = implode(", ", $_POST['indoorInts']);
 
-                if (!validIndoor($_POST['indoorInts'])) {
-
-                    //$f3->set('errors["indoorInts"]', 'No spoofing please!');
-                    var_dump($_POST);
-                }
+//                if (!validIndoor($_POST['indoorInts'])) {
+//
+//                    //$f3->set('errors["indoorInts"]', 'No spoofing please!');
+//                    var_dump($_POST);
+//                }
             }
-            $_SESSION['indoorInts'] = $indoorInts;
+            $_SESSION['membership']->setIndoorInts($indoorInts);
 
 
             $outdoorInts = $_POST['outdoorInts'];
@@ -247,25 +241,34 @@ class Controllers
             } else {
                 $outdoorInts = implode(", ", $_POST['outdoorInts']);
 
-                if (!validOutdoor($_POST['outdoorInts'])) {
-
-                    //$f3->set('errors["outdoorInts"]', 'No spoofing please!');
-                    var_dump($_POST);
-                }
+//                if (!validOutdoor($_POST['outdoorInts'])) {
+//
+//                    //$f3->set('errors["outdoorInts"]', 'No spoofing please!');
+//                    var_dump($_POST);
+//                }
             }
-            $_SESSION['outdoorInts'] = $outdoorInts;
+            $_SESSION['membership']->setOutdoorInts($outdoorInts);
             header('location: summary');
 
         }
-
-        //Add interest data to hive
-        $f3->set('indoorInterest', getIndoorInterest());
-        $f3->set('outdoorInterest', getOutdoorInterest());
 
 
         $view = new Template();
         echo $view->render('views/interest.html');
     }
+    function summary()
+    {
+//        echo "<pre>";
+//        var_dump($_SESSION);
+//        echo"<pre>";
+
+        $view = new Template();
+        echo $view->render('views/summary.html');
+
+        //clear the session array
+        session_destroy();
+    }
+
 
 
 }
