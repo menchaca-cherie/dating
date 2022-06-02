@@ -16,32 +16,32 @@ $f3 = Base::instance();
 //echo gettype($f3); example of what type is $f3
 
 //creat an instance of the base class
-$con = new Controllers($f3);
+$cons = new Controllers($f3);
 
 
 //Define a default route /
 $f3->route('GET /', function () {
 
-    $GLOBALS['con']->home();
+    $GLOBALS['cons']->home();
 });
 //Define a route for Personal Information
 $f3->route('GET|POST /personal', function ($f3) {
     //echo "Personal Information";
-    $GLOBALS['con']->personal();
+    $GLOBALS['cons']->personal();
 });
 //Define a route for Profile
 $f3->route('GET|POST /profile', function ($f3) {
-    $GLOBALS['con']->profile();
+    $GLOBALS['cons']->profile();
 });
 $f3->route('GET|POST /interest', function ($f3) {
     //echo "Profile";
 
-    $GLOBALS['con']->interest();
+    $GLOBALS['cons']->interest();
 
 });
 $f3->route('GET|POST /summary', function () {
 
-    $GLOBALS['con']->summary();
+    $GLOBALS['cons']->summary();
 
 });
 
