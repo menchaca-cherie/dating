@@ -14,11 +14,12 @@ class Controllers
     }
     function personal()
     {
+        var_dump($_POST);
         //Add genders data to hive
         $this->_f3->set('genders', DataLayer::getGenders());
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            var_dump($_POST);
+
 
             //Get the data
             //first
@@ -37,7 +38,12 @@ class Controllers
             $phone = $_POST['phone'];
             $this->_f3->set('phone', $phone);
 
-            $gender = isset($_POST['gender']) ? $_POST['gender'] : "";
+            $gender = "";
+            if(isset($_POST['gender'])){
+                $gender = $_POST['gender'];
+            }
+
+            //$premium = isset($_POST['premium']) ? $_POST['premium'] : "";
 
             //require
 
@@ -45,22 +51,23 @@ class Controllers
             //if data is valid
             if (Validation::validName($first)) {
 
+//                if(isset($premium))
+//                {
+//                    // create new premium object
+//                    $premium = new Premium();
+//                } else
+//                {
+//                    // create new membership object
+//                    $membership = new Membership();
+//                }
 
-
-                if(isset($premium) == "checked")
-                {
-                    $premium = new Premium();
-                } else
-                {
-                    // create new membership object
-                    $membership = new Membership();
-                }
-
+                $membership = new Membership();
                 //Add the first name to the membership
                 $membership->setFirst($first);
 
-                //Store the membership in the session array
+                //Store the order in the session array
                 $_SESSION['membership'] = $membership;
+
 
                 //store it in the session array
                 $_SESSION['first'] = $first;
@@ -73,21 +80,17 @@ class Controllers
 
             if (Validation::validName($last)) {
 
-
                 //Add the last name to the membership
                 $membership->setLast($last);
 
                 //Store the membership in the session array
                 $_SESSION['membership'] = $membership;
-
                 //store it in the session array
                 $_SESSION['last'] = $last;
 
             } else {
                 $this->_f3->set('errors["last"]', 'Please enter your last name with letters.');
             }
-
-
 
             if (Validation::validAge($age)) {
 
@@ -99,6 +102,8 @@ class Controllers
 
                 //store it in the session array
                 $_SESSION['age'] = $age;
+
+
 
             } else {
                 $this->_f3->set('errors["age"]', 'Please enter your age.');
@@ -116,15 +121,12 @@ class Controllers
 
                 //store it in the session array
                 $_SESSION['phone'] = $phone;
+
             } else {
                 $this->_f3->set('errors["phone"]', 'Please enter your telephone number.');
             }
 
-            //gender
-
-
             if (Validation::validGender($gender)) {
-
                 //Add the food to the order
                 $membership->setGender($gender);
 
@@ -133,12 +135,11 @@ class Controllers
 
                 //store it in the session array
                 $_SESSION['gender'] = $gender;
+
                 $_SESSION['membership']->setGender($gender);
             } else {
                 $this->_f3->set('errors["gender"]', 'Gender selection is invalid');
             }
-
-
 
             //Redirect to order2 route if there are no errors
             if (empty($this->_f3->get('errors'))) {
@@ -147,46 +148,57 @@ class Controllers
 
         }
 
+        //Add genders data to hive
+        $this->_f3->set('genders', DataLayer::getGenders());
 
         $view = new Template();
         echo $view->render('views/personal.html');
     }
     function profile()
     {
+        var_dump($_POST);
         //Get the data
-        $email = $_POST['email'];
-        $this->_f3->set('email', $email);
 
-        //state
-        $state = $_POST['state'];
-        $this->_f3->set('userState', $state);
-
-        //seeking
-        $seeking = $_POST['seeking'];
-        $this->_f3->set('userSeeking', $seeking);
-
-        //bio
-        $bio = $_POST['bio'];
-        $this->_f3->set('bio', $bio);
-
-        //Add states data to hive
-        $this->_f3->set('states',DataLayer::getState());
-        $this->_f3->set('seekings',DataLayer::getSeeking());
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //state
+        $state = "";
+        if(isset($_POST['state'])){
+            $state = $_POST['state'];
+        }
+        $_SESSION['state'] = $state;
+
+        $_SESSION['membership']->setState($state);
+
+
+        //seeking
+        $seeking = "";
+        if(isset($_POST['seeking'])){
+            $seeking = $_POST['seeking'];
+        }
+        //store it in the session array
+        $_SESSION['seeking'] = $seeking;
+
+        $_SESSION['membership']->setSeeking($seeking);
+
+        //bio
+        $bio = "";
+        if(isset($_POST['bio'])){
+            $bio = $_POST['bio'];
+        }
+
+        $_SESSION['bio'] = $bio;
+        $_SESSION['membership']->setBio($bio);
+
+        $email = "";
+        if(isset($_POST['email'])){
+            $email = $_POST['email'];
+        }
+        //store it in the session array
+        $_SESSION['email'] = $email;
 
             if (Validation::validEmail($email)) {
-                //Create a new membership object
-                $membership = new Membership();
-
-                //Add the food to the order
-                $membership->setEmail($email);
-
-                //Store the membership in the session array
-                $_SESSION['membership'] = $membership;
-
-                //store it in the session array
-                $_SESSION['email'] = $email;
+                $_SESSION['membership']->setEmail($email);
             } else {
                 $this->_f3->set('errors["email"]', 'Please enter a valid email.');
             }
@@ -195,35 +207,11 @@ class Controllers
                 header('location: interest');
             }
 
-            //Add the food to the order
-            $membership->setState($state);
-            //Store the membership in the session array
-            $_SESSION['membership'] = $membership;
-            //store it in the session array
-            $_SESSION['state'] = $state;
-            $_SESSION['membership']->setState($state);
-
-
-            //Add the food to the order
-            $membership->setSeeking($state);
-            //Store the membership in the session array
-            $_SESSION['membership'] = $membership;
-            //store it in the session array
-            $_SESSION['seeking'] = $seeking;
-            $_SESSION['membership']->setSeeking($seeking);
-
-            //Add the food to the order
-            $membership->setBio($bio);
-            //Store the membership in the session array
-            $_SESSION['membership'] = $membership;
-            //store it in the session array
-            $_SESSION['bio'] = $bio;
-            $_SESSION['membership']->setBio($bio);
-
-
         }
 
-
+        //Add states data to hive
+        $this->_f3->set('states',DataLayer::getState());
+        $this->_f3->set('seekings',DataLayer::getSeeking());
 
         $view = new Template();
         echo $view->render('views/profile.html');
@@ -231,22 +219,11 @@ class Controllers
     function interest()
     {
         //Add interest data to hive
-        $this->_f3->set('indoorInterest',DataLayer::getIndoorInterest());
-        $this->_f3->set('outdoorInterest',DataLayer::getOutdoorInterest());
+        $this->_f3->set('indoorInterest', DataLayer::getIndoorInterest());
+        $this->_f3->set('outdoorInterest', DataLayer::getOutdoorInterest());
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $indoorInts = "";
-            //create new premium object
-            $premium = new Premium();
-
-            //Add the indoor interest to the premium
-            $premium->setIndoorInts((array)$indoorInts);
-
-            //Store the membership in the session array
-            $_SESSION['premium'] = $premium;
-
-            //store it in the session array
-            $_SESSION['indoorInts'] = $indoorInts;
 
             if (empty($_POST['indoorInts'])) {
                 $indoorInts = "no indoor activities selected";
@@ -259,6 +236,17 @@ class Controllers
 //                    var_dump($_POST);
 //                }
             }
+            //Create a new membership object
+            $premium = new Premium();
+
+            //Add the food to the order
+            $premium->setIndoorInts((array)$indoorInts);
+
+            //Store the membership in the session array
+            $_SESSION['premium'] = $premium;
+
+            //store it in the session array
+            $_SESSION['indoorInts'] = $indoorInts;
             $_SESSION['premium']->setIndoorInts((array)$indoorInts);
 
 

@@ -9,7 +9,7 @@ class DataLayer
 {
     static function getGenders()
     {
-        return array("male", "female", "non-binary");
+        return array("Male", "Female", "Non-Binary");
     }
 
     static function getState()
@@ -28,7 +28,7 @@ class DataLayer
 
     static function getSeeking()
     {
-        return array("male", "female", "non-binary");
+        return array("Male", "Female", "Non-Binary");
     }
     static function getIndoorInterest()
     {
