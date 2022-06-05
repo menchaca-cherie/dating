@@ -76,11 +76,10 @@ File Description: Personal Form Page for My Dating Website(dating website)
                             <label class="control-label">Select Gender: </label>
                             <div class="form-check form-check-inline">
                                 <repeat group="{{ @genders }}" value="{{ @gender }}">
-                                    <label class="form-check-label" for="inlineCheckbox"><input
+                                    <label class="form-check-label"><input
                                             class="form-check-input ml-3"
                                             type="radio"
                                             name="gender"
-                                            id="inlineCheckbox"
                                             value="{{ @gender }}"
                                     >
                                         {{ ucfirst(@gender) }}</label><br>
@@ -106,7 +105,7 @@ File Description: Personal Form Page for My Dating Website(dating website)
                             </check>
                         </div>
                         <div class="mt-2 ml-3">
-                            <input type="checkbox" id="premium" name="premium" value="{{ @premium }}">
+                            <input type="checkbox" id="premium" name="premium">
                             <label for="premium">Sign-up for a premium account.</label><br>
                         </div>
                     </div> <!-- row-->

@@ -8,7 +8,7 @@ File Description: CSS Styling for My Dating Website(dating website)
 /*body styles*/
 body{
     margin: 25px 100px 10px 300px;
-    background-color: #e1bdbd;
+    background-color: pink;
     border: 2px white;
 }
 /*H1 styles*/
@@ -52,5 +52,4 @@ table, td
 body.container{
     height: 1600px;
 }
-
 

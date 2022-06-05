@@ -40,9 +40,11 @@ File Description: Summary Page for My Dating Website(dating website)
                     <tr>
                         <td class="py-2">Seeking:  {{@SESSION.seeking}}</td>
                     </tr>
-                    <tr>
-                        <td class="py-2">Interest: {{@SESSION.indoorInts}}, {{@SESSION.outdoorInts}}</td>
-                    </tr>
+                    <check if="{{ ($_SESSION['profile'] instanceof premium) }}">
+                        <tr>
+                            <td class="p-2">Interests: {{ @SESSION.profile->getInDoorInts() }}, {{ @SESSION.profile->getOutDoorInts() }}</td>
+                        </tr>
+                    </check>
                 </table>
             </div>
         </div>

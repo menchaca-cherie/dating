@@ -37,8 +37,8 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
             <div class="row">
                 <repeat group="{{ @indoorInterest }}" value="{{ @indoorInt }}">
                     <div class="col-2 ml-3">
-                    <label class="form-check-label" for="exampleCheck"> <input type="checkbox"
-                                                                               class="form-check-input" name="indoorInts[]" id="exampleCheck" value="{{ @indoorInt}}"
+                    <label class="form-check-label" for="indoor"> <input type="checkbox"
+                                                                               class="form-check-input" name="indoorInts[]" id="indoor" value="{{ @indoorInt}}"
                     >
                         {{ucfirst(@indoorInt) }}</label><br>
                     </div>
@@ -56,8 +56,8 @@ File Description: Interest Checkbox Form Page for My Dating Website(dating websi
             <div class="row">
                 <repeat group="{{ @outdoorInterest }}" value="{{ @outdoorInt }}">
                     <div class="col-2 ml-3">
-                        <label class="form-check-label" for="exampleCheck"> <input type="checkbox"
-                                                                                   class="form-check-input" name="outdoorInts[]" id="exampleCheck1" value="{{ @@outdoorInt}}"
+                        <label class="form-check-label" for="outdoor"> <input type="checkbox"
+                                                                                   class="form-check-input" name="outdoorInts[]" id="outdoor" value="{{ @@outdoorInt}}"
                         >
                             {{ucfirst(@outdoorInt) }}</label><br>
                     </div>

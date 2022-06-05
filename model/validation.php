@@ -6,6 +6,10 @@
 //validate name
 class Validation
 {
+    /**Static function validation for validName
+     * @param $name
+     * @return bool
+     */
     static function validName($name)
     {
         if ($name=="") {
@@ -18,7 +22,11 @@ class Validation
             return true;
         }
     }
-//validate age
+    /**Static function validation for validAge
+     * @param $age
+     * @return bool
+     */
+    //validate age
     static function validAge($age)
     {
         if ($age=="") {
@@ -32,12 +40,20 @@ class Validation
         }
 
     }
-//validate phone
+    /**Static function validation for validPhone
+     * @param $phone
+     * @return bool
+     */
+    //validate phone
     static function validPhone($phone)
     {
         return strlen($phone) == 10;
     }
-//validate email
+    /**Static function validation for validEmail
+     * @param $email
+     * @return bool
+     */
+    //validate email
     static function validEmail($email)
     {
         if(filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -47,19 +63,51 @@ class Validation
             return false;
         }
     }
+
+    /**This function checks if the gender is valid
+     * @param $gender
+     * @return bool
+     */
     static function validGender($gender)
     {
         return in_array($gender, DataLayer::getGenders());// will return true if it is in getGender()
     }
-//valid interest
-    static function validIndoor($indoorInt)
+    //valid interest
+
+    /**This function checks if the indoor interest is valid
+     * @param $userIndoorArray
+     * @return bool
+     */
+    static function validIndoor($userIndoorIntArray)
     {
-        return in_array($indoorInt, DataLayer::getIndoorInterest());
+        $validIndoorArray = DataLayer::getIndoorInterest();
+
+        //Make sure each user selection is in the array of valid options
+        foreach ($userIndoorIntArray as $userIndoorInt) {
+            if (!in_array($userIndoorInt, $validIndoorArray)) {
+                return false;
+            }
+        }
+        return true;
     }
 
-    static function validOutdoor($outdoorInt)
+    /**This checks if the outdoor interest is valid
+     * @param $userOutdoorArray
+     * @return bool
+     */
+    static function validOutdoor($userOutdoorIntArray)
     {
-        return in_array($outdoorInt, DataLayer::getOutdoorInterest());
+
+        $validOutdoorArray = DataLayer::getOutdoorInterest();
+
+        //Make sure each user selection is in the array of valid options
+        foreach($userOutdoorIntArray as $userOutdoorInt) {
+        if (!in_array($userOutdoorInt, $validOutdoorArray)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }

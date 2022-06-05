@@ -1,11 +1,17 @@
 <?php
 
-//TODO: Add a description to each method
+
 
 /**
  * This class represents all members of the dating forms.
  */
 class Membership{
+
+    /**Private fields for the following
+     * first, last, age, phone, gender, email, state, seeking,
+     * bio
+     * @var string
+     */
 
     private $_first;
     private $_last;
@@ -18,6 +24,12 @@ class Membership{
     private $_bio;
 
     //constructor
+
+    /**
+     * The constructor for the following fields
+     * first, last, age, phone, gender, email, state, seeking,
+     * bio
+     */
     public function __construct()
     {
         $this->_first = "";
@@ -32,6 +44,10 @@ class Membership{
     }
     //getters and setters for each
 
+    /**Get the first name for dating
+     * @return string
+     */
+
     public function getFirst(): string
     {
         return $this->_first;
@@ -44,6 +60,9 @@ class Membership{
     {
         $this->_first = $first;
     }
+    /**Get the last name for dating
+     * @return string
+     */
     public function getLast(): string
     {
         return $this->_last;
@@ -56,7 +75,9 @@ class Membership{
     {
         $this->_last = $last;
     }
-
+    /**Get the age for dating
+     * @return int
+     */
     public function getAge(): int
     {
         return $this->_age;
@@ -69,6 +90,9 @@ class Membership{
     {
         $this->_last = $age;
     }
+    /**Get the gender for dating
+     * @return string
+     */
     public function getGender(): string
     {
         return $this->_gender;
@@ -81,6 +105,9 @@ class Membership{
         $this->_gender = $gender;
     }
     //phone
+    /**Get the phone number for dating
+     * @return string
+     */
     public function getPhone(): string
     {
         return $this->_phone;
@@ -92,6 +119,9 @@ class Membership{
     {
         $this->_phone = $phone;
     }
+    /**Get the email for dating
+     * @return string
+     */
     public function getEmail(): string
     {
         return $this->_email;
@@ -103,6 +133,9 @@ class Membership{
     {
         $this->_email = $email;
     }
+    /**Get the state for dating
+     * @return string
+     */
     public function getState(): string
     {
         return $this->_state;
@@ -114,6 +147,9 @@ class Membership{
     {
         $this->_state = $state;
     }
+    /**Get the seeking gender for dating
+     * @return string
+     */
     public function getSeeking(): string
     {
         return $this->_seeking;
@@ -125,6 +161,9 @@ class Membership{
     {
         $this->_seeking = $seeking;
     }
+    /**Get the bio for dating
+     * @return string
+     */
     public function getBio(): string
     {
         return $this->_bio;
